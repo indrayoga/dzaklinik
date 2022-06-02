@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agama;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
+use Inertia\Inertia;
 
 class AgamaController extends Controller
 {
@@ -15,6 +16,10 @@ class AgamaController extends Controller
     public function index()
     {
         //
+        return Inertia::render('Agama/Index', [
+            'filters' => Request::all('search', 'trashed'),
+            'agama' => Agama::paginate(25,['id','nama']),
+        ]);
     }
 
     /**

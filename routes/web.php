@@ -49,6 +49,9 @@ Route::put('contacts/{contact}')->name('contacts.update')->uses('ContactsControl
 Route::delete('contacts/{contact}')->name('contacts.destroy')->uses('ContactsController@destroy')->middleware('auth');
 Route::put('contacts/{contact}/restore')->name('contacts.restore')->uses('ContactsController@restore')->middleware('auth');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('agama')->name('agama')->uses('AgamaController@index');
+});
 // Reports
 Route::get('reports')->name('reports')->uses('ReportsController')->middleware('auth');
 
