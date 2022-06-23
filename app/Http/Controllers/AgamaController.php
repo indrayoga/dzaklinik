@@ -18,7 +18,9 @@ class AgamaController extends Controller
         //
         return Inertia::render('Agama/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'agama' => Agama::paginate(25,['id','nama']),
+            'agama' => Agama::when(Request::get('search'), fn($query)=>$query->where('nama','like','%'.Request::get('search').'%'))
+            ->paginate(25,['id','nama'])
+                        ->appends(Request::all()),
         ]);
     }
 

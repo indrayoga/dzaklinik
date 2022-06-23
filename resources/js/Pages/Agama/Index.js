@@ -19,7 +19,7 @@ export default function Index() {
         <SearchFilter />
         <InertiaLink
           className="btn-indigo focus:outline-none"
-          href={route('contacts.create')}
+          href={route('agama.create')}
         >
           <span>Create</span>
           <span className="hidden md:inline"> Agama</span>
@@ -55,7 +55,7 @@ export default function Index() {
                 </td>
                 <td className="border-t">
                   <InertiaLink
-                    href={route('contacts.edit', id)}
+                    href={route('agama.edit', id)}
                     className="flex items-center px-6 py-4 focus:text-indigo-700 focus:outline-none"
                   >
                     {nama}

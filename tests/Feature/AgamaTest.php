@@ -34,7 +34,6 @@ class AgamaTest extends TestCase
      */
     public function test_can_view_agama()
     {
-        $this->withoutExceptionHandling();
         Agama::factory()->count(5)->create();
 
         $this->actingAs($this->user)
@@ -44,6 +43,23 @@ class AgamaTest extends TestCase
                 $page->component('Agama/Index');
                 $page->has('agama.data', 5, function (Assert $page) {
                     $page->hasAll(['id', 'nama']);
+                });
+            });
+    }
+
+    public function test_can_search_for_agama()
+    {
+        Agama::factory()->count(5)->create()->first()->update([
+            'nama' => 'islam'
+        ]);
+
+        $this->actingAs($this->user)
+            ->get('/agama?search=islam')
+            ->assertStatus(200)
+            ->assertInertia(function (Assert $page) {
+                $page->where('filters.search', 'islam');
+                $page->has('agama.data', 1, function (Assert $page) {
+                    $page->where('nama', 'islam')->etc();
                 });
             });
     }

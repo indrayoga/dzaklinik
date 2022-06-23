@@ -10,4 +10,5 @@ class Agama extends Model
     use HasFactory;
 
     protected $table = 'agama';
+    protected $fillable = ['nama'];
 }
